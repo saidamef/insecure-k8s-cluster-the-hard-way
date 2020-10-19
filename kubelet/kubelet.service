@@ -1,0 +1,14 @@
+[Unit]
+Wants=docker.socket
+
+[Service]
+ExecStart=/usr/local/bin/kubelet \
+  --kubeconfig=/var/lib/kubelet/kubelet.conf  \
+  --register-node=true 
+  --pod-manifest-path=/root/pocteo-cluster-the-hard-way/insecure-k8s-cluster/manifests
+
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

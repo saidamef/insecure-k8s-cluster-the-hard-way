@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: static-kube-apiserver
+  labels:
+    role: static-kube-apiserver
+  namespace: kube-system
+spec:
+  hostNetwork: true
+  containers:
+    - name: static-kube-apiserver
+      image: saidameft/kube-apiserver:1.17
+      imagePullPolicy: IfNotPresent
+      command:
+      - kube-apiserver
+      - --etcd-servers=http://localhost:2379
+      - --service-cluster-ip-range=10.0.0.0/16 
+      - --bind-address=0.0.0.0 
+      - --insecure-bind-address=0.0.0.0 
+      - --disable-admission-plugins=ServiceAccount
+      - --allow-privileged=true
+      - --anonymous-auth=true
+

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: static-kube-scheduler
+  labels:
+    role: static-kube-scheduler
+  namespace: kube-system
+spec:
+  hostNetwork: true
+  containers:
+    - name: kube-scheduler
+      image: saidameft/kube-scheduler:1.17 
+      imagePullPolicy: IfNotPresent
+      command:
+      - kube-scheduler
+      - --master=http://localhost:8080
+
